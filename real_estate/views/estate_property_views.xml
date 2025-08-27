@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<odoo>
+    <data> <!-- Punto 5 -->
+        <record id="estate_property_action" model="ir.actions.act_window">
+            <field name="name">Propiedades</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        
+        <!-- vista de lista (tree)-->
+        <record id="estate_property_tree_view" model="ir.ui.view">
+            <field name="name">estate.property.tree</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <tree string="Propiedades">
+                    <field name="name"/>
+                    <field name="postcode"/>
+                    <field name="expected_price"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="facades"/> 
+                </tree>
+            </field>
+        </record>
+
+        <!-- Punto 17 -->
+        <!-- Vista search (barra de búsqueda/filtros) -->
+        <record id="estate_property_search_view" model="ir.ui.view">
+            <field name="name">estate.property.search</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Propiedades">
+                    <!-- a. Buscar por name, postcode, expected_price, bedrooms, living_area y facades -->
+                   <field name="name" string="Buscar por Nombre/Código Postal" 
+                          filter_domain="['|', ('name', 'ilike', self), ('postcode', 'ilike', self)]"/>
+                   <field name="expected_price" string="Buscar por Precio" 
+                          filter_domain="[('expected_price', '=', self)]" />
+                   <field name="bedrooms" string="Buscar por numero de habitaciones/superficie cubierta/numero de fachadas" 
+                          filter_domain="['|', '|', ('bedrooms', '=', self), ('living_area', '=', self), ('facades', '=', self)]"/>
+
+                    <!-- b. Filtro: registros creados por el usuario con sesión activa -->
+                    <filter string="Mis Propiedades" 
+                            name="my_properties" 
+                            domain="[('create_uid', '=', uid)]"/> 
+
+                    <!-- c. Agrupar los registros por usuario que lo creó -->
+                    <group expand="0" string="Agrupar por...">
+                        <filter string="Creador" 
+                                name="group_by_user" 
+                                context="{'group_by':'create_uid'}"/>
+
+                    <!-- d. Agrupar los registros por mes -->
+                        <filter string="Mes de creación" 
+                                name="group_by_month" 
+                                context="{'group_by':'date_availability:month', 'tz':'America/Buenos_Aires'}"/>
+                                
+                    <!-- e. Agrupar los registros por código postal -->
+                        <filter string="Código Postal" 
+                                name="group_by_postcode" 
+                                context="{'group_by':'postcode'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>
