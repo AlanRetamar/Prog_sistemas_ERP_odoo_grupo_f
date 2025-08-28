@@ -8,7 +8,7 @@
         </record>
 
         
-        <!-- vista de lista (tree) -->
+        <!-- vista de lista (list) -->
         <record id="estate_property_list_view" model="ir.ui.view">
             <field name="name">estate.property.list</field>
             <field name="model">estate.property</field>
