@@ -4,23 +4,23 @@
         <record id="estate_property_action" model="ir.actions.act_window">
             <field name="name">Propiedades</field>
             <field name="res_model">estate.property</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         
-        <!-- vista de lista (tree)-->
-        <record id="estate_property_tree_view" model="ir.ui.view">
-            <field name="name">estate.property.tree</field>
+        <!-- vista de lista (tree) -->
+        <record id="estate_property_list_view" model="ir.ui.view">
+            <field name="name">estate.property.list</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <tree string="Propiedades">
+                <list string="Propiedades">
                     <field name="name"/>
                     <field name="postcode"/>
                     <field name="expected_price"/>
                     <field name="bedrooms"/>
                     <field name="living_area"/>
                     <field name="facades"/> 
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -44,7 +44,7 @@
                             name="my_properties" 
                             domain="[('create_uid', '=', uid)]"/> 
 
-                    <!-- c. Agrupar los registros por usuario que lo creó -->
+                    <!-- c. Agrupar los registros por el usuario que lo creó -->
                     <group expand="0" string="Agrupar por...">
                         <filter string="Creador" 
                                 name="group_by_user" 
