@@ -1,7 +1,7 @@
 # Punto 2
 {
     'name': 'Inmobiliaria',
-    'version': '15.0.1.0.0',
+    'version': '1.0.0',
     'summary': 'Módulo de prueba para inmobiliaria',
     'category': 'Unla',
     'depends': ['base'],
