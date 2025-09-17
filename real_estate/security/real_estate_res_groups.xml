@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<odoo>
-    <!-- Categoría de grupo: Inmobiliaria -->
-    <record id="module_category_inmobiliaria" model="ir.module.category">
-        <field name="name">Inmobiliaria</field>
-        <field name="sequence">10</field>
-    </record>
-    <!-- Grupo Manager de Propiedades -->
-    <record id="group_estate_property_manager" model="res.groups">
-        <field name="name">Manager de Propiedades</field>
-        <field name="category_id" ref="module_category_inmobiliaria"/>
-    </record>
-
-    <!-- Grupo Vendedor de Propiedades -->
-    <record id="group_estate_property_seller" model="res.groups">
-        <field name="name">Vendedor de Propiedades</field>
-        <field name="category_id" ref="module_category_inmobiliaria"/>
-    </record>
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data noupdate="0"> 
@@ -40,5 +21,4 @@
             <field name="category_id" ref="real_estate_category_group"/> 
         </record>
     </data>
->>>>>>> a05f799 (Agrego el punto 16)
 </odoo>
