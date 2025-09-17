@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <odoo>
-    <data> <!-- Punto 5 -->
+    <data> 
+        <!-- Punto 5 -->
         <record id="estate_property_action" model="ir.actions.act_window">
             <field name="name">Propiedades</field>
             <field name="res_model">estate.property</field>
@@ -8,7 +9,7 @@
         </record>
 
         
-        <!-- vista de lista (list) -->
+        <!-- vista de lista (list) Punto 22 -->
         <record id="estate_property_list_view" model="ir.ui.view">
             <field name="name">estate.property.list</field>
             <field name="model">estate.property</field>
@@ -16,22 +17,24 @@
                 <list string="Propiedades">
                     <field name="name"/>
                     <field name="postcode"/>
-                    <field name="expected_price"/>
                     <field name="bedrooms"/>
                     <field name="living_area"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
                     <field name="facades"/> 
+                    <field name="date_availability"/>
                 </list>
             </field>
         </record>
 
-        <!-- Punto 17 -->
+    
         <!-- Vista search (barra de búsqueda/filtros) -->
         <record id="estate_property_search_view" model="ir.ui.view">
             <field name="name">estate.property.search</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
                 <search string="Buscar Propiedades">
-                    <!-- a. Buscar por name, postcode, expected_price, bedrooms, living_area y facades -->
+                    <!-- Punto 17 a. Buscar por name, postcode, expected_price, bedrooms, living_area y facades -->
                    <field name="name" string="Buscar por Nombre/Código Postal" 
                           filter_domain="['|', ('name', 'ilike', self), ('postcode', 'ilike', self)]"/>
                    <field name="expected_price" string="Buscar por Precio" 
@@ -39,28 +42,107 @@
                    <field name="bedrooms" string="Buscar por numero de habitaciones/superficie cubierta/numero de fachadas" 
                           filter_domain="['|', '|', ('bedrooms', '=', self), ('living_area', '=', self), ('facades', '=', self)]"/>
 
-                    <!-- b. Filtro: registros creados por el usuario con sesión activa -->
+                    <!-- Punto 24 a. Filtro: registros que tengan estado nuevo u oferta recibida -->   
+                    <filter string="Disponible" 
+                         name="filter_available" 
+                         domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
+
+                    <!-- Punto 17 b. Filtro: registros creados por el usuario con sesión activa -->
                     <filter string="Mis Propiedades" 
                             name="my_properties" 
                             domain="[('create_uid', '=', uid)]"/> 
 
-                    <!-- c. Agrupar los registros por el usuario que lo creó -->
+                    <!-- Punto 17 c. Agrupar los registros por el usuario que lo creó -->
                     <group expand="0" string="Agrupar por...">
                         <filter string="Creador" 
                                 name="group_by_user" 
                                 context="{'group_by':'create_uid'}"/>
 
-                    <!-- d. Agrupar los registros por mes -->
+                    <!-- Punto 17 d. Agrupar los registros por mes -->
                         <filter string="Mes de creación" 
                                 name="group_by_month" 
                                 context="{'group_by':'date_availability:month', 'tz':'America/Buenos_Aires'}"/>
                                 
-                    <!-- e. Agrupar los registros por código postal -->
+                    <!-- Punto 17 e. Agrupar los registros por código postal -->
                         <filter string="Código Postal" 
                                 name="group_by_postcode" 
                                 context="{'group_by':'postcode'}"/>
+
+                    <!-- Punto 24 b. Agrupar los registros por estado -->   
+                        <filter string="Estado" 
+                               name="group_by_state" 
+                               context="{'group_by':'state'}"/>
                     </group>
+
+
                 </search>
+            </field>
+        </record>
+
+        <!-- Vista de formulario (form) Punto 23 -->
+        <record id="view_estate_property_form_view" model="ir.ui.view">
+            <field name="name">view.estate.property.form</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <form string="Formulario de propiedades">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1>
+                                <field name="name" placeholder="Nombre propiedad"/>
+                                <!-- Punto 36 -->
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </h1>
+                        </group>
+                        <group>
+                            <group>
+                                <!-- Punto 30 -->
+                                <field name="property_type_id"/>
+                                <field name="postcode"/>
+                                <field name="date_availability"/>
+                            </group>
+                            <group>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripción">
+                                <group>
+                                    <group>
+                                        <field name="description"/>
+                                        <field name="bedrooms"/>
+                                        <field name="living_area"/>
+                                        <field name="facades"/>
+                                        <field name="garage"/>
+                                    </group>
+                                    <group>
+                                        <field name="garden"/>
+                                        <field name="garden_area"/>
+                                        <field name="garden_orientation"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <!-- Punto 30 -->
+                            <page string="Mas info">
+                                <group>
+                                        <field name="buyer_id"/>
+                                        <field name="salesman_id"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <!-- Punto 41 -->
+                            <page string="Ofertas">
+                                <field name="offer_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
             </field>
         </record>
 
