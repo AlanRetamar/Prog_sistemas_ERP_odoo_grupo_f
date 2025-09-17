@@ -1,3 +1,14 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_estate_property, access_estate_property,model_estate_property,real_estate.group_estate_property_seller,1,0,0,0
-access_estate_property_manager,access_estate_property_manager,model_estate_property,real_estate.group_estate_property_manager,1,1,1,1
+access_estate_property,access_estate_property,model_estate_property,base.group_user,1,0,0,0,  Punto 10
+
+access_estate_property_manager,access_estate_property_manager,model_estate_property,real_estate.group_manager_estate_property,1,1,1,1, Punto 12
+access_estate_property_sales,access_estate_property_sales,model_estate_property,real_estate.group_sales_estate_property,1,0,0,0, Punto 14
+
+access_estate_property_type_manager,access_estate_property_type_manager,model_estate_property_type,real_estate.group_manager_estate_property,1,1,1,1, Punto 26
+access_estate_property_type_sales,access_estate_property_type_sales,model_estate_property_type,real_estate.group_sales_estate_property,1,0,0,0, Punto 26
+
+access_estate_property_tag_manager,access_estate_property_tag_manager,model_estate_property_tag,real_estate.group_manager_estate_property,1,1,1,1, Punto 32
+access_estate_property_tag_sales,access_estate_property_tag_sales,model_estate_property_tag,real_estate.group_sales_estate_property,1,0,0,0, Punto 32
+
+access_estate_property_offer_manager,access_estate_property_offer_manager,model_estate_property_offer,real_estate.group_manager_estate_property,1,1,1,1, Punto 38
+access_estate_property_offer_sales,access_estate_property_offer_sales,model_estate_property_offer,real_estate.group_sales_estate_property,1,0,0,0, Punto 38
