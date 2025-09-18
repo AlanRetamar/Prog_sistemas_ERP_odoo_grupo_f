@@ -125,8 +125,6 @@
                                     </group>
                                 </group>
                             </page>
-                        </notebook>
-                        <notebook>
                             <!-- Punto 30 -->
                             <page string="Mas info">
                                 <group>
@@ -134,8 +132,6 @@
                                         <field name="salesman_id"/>
                                 </group>
                             </page>
-                        </notebook>
-                        <notebook>
                             <!-- Punto 41 -->
                             <page string="Ofertas">
                                 <field name="offer_ids"/>
