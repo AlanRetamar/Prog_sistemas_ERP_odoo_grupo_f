@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>     
 <odoo>
     <data>    
-        <record id="view_estate_property_offer_list_view" model="ir.ui.view">
+        <record id="estate_property_offer_list_view" model="ir.ui.view">
             <field name="name">estate.property.offer.list</field>
             <field name="model">estate.property.offer</field>
             <field name="arch" type="xml">
