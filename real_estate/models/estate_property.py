@@ -1,5 +1,5 @@
 # Punto 3
-from odoo import models, fields
+from odoo import models, fields, api
 from datetime import date # Punto 20
 from dateutil.relativedelta import relativedelta # Punto 20
 
@@ -79,4 +79,20 @@ class EstateProperty(models.Model):
         string = "Ofertas",
     )
 
-
+    #Punto 1 unidad 2
+    total_area = fields.Integer(string="Superficie total", compute="_compute_total_area", store = True) #Punto 4 unidad 2
+    
+    #Punto 7 unidad 2
+    best_offer = fields.Float(string='Mejor oferta', compute='_compute_best_offer')
+    
+    
+    @api.depends("garden_area","living_area") #Punto 5 unidad 2
+    def _compute_total_area(self): #Punto 1 unidad 2
+        for rec in self:
+            rec.total_area = rec.living_area + rec.garden_area
+            
+    #Punto 7 unidad 2   
+    def _compute_best_offer(self):
+        for rec in self:
+            offers = rec.offer_ids.mapped('price')
+            rec.best_offer = max(offers) if offers else 0
