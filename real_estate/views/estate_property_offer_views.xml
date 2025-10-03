@@ -6,7 +6,7 @@
             <field name="name">estate.property.offer.list</field>
             <field name="model">estate.property.offer</field>
             <field name="arch" type="xml">
-                <list string="Ofertas" editable="top">
+                <list> <!-- Punto 8 unidad 2 saco editable="top" -->
                     <field name="price"/>
                     <field name="partner_id"/>
                     <field name="status"/>
