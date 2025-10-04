@@ -17,6 +17,7 @@ class EstateProperty(models.Model):
     bedrooms = fields.Integer(string="Habitaciones", default=2)
     living_area = fields.Integer(string="Superficie cubierta")
     facades = fields.Integer(string="Fachadas")
+   
     garage = fields.Boolean(string="Garage")
     garden = fields.Boolean(string="Jardin")
     garden_orientation = fields.Selection(
@@ -78,6 +79,9 @@ class EstateProperty(models.Model):
         inverse_name = "property_id",
         string = "Ofertas",
     )
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        self.garden_area = 10 if self.garden else 0
 
     #Punto 1 unidad 2
     total_area = fields.Integer(string="Superficie total", compute="_compute_total_area", store = True) #Punto 4 unidad 2
@@ -96,3 +100,26 @@ class EstateProperty(models.Model):
         for rec in self:
             offers = rec.offer_ids.mapped('price')
             rec.best_offer = max(offers) if offers else 0
+
+    @api.onchange('expected_price')
+    def _onchange_expected_price(self):
+        if self.expected_price and self.expected_price < 10000:
+            return {
+                'warning': {
+                    'title': 'Advertencia',
+                    'message': 'El precio esperado es menor a $10,000'
+                }
+            }
+    def action_sold(self):
+        for record in self:
+            if record.state == 'canceled':
+                raise UserError('Una propiedad cancelada no puede ser marcada como vendida.')
+            record.state = 'sold'
+        return True
+    
+    def action_cancel(self):
+        for record in self:
+            if record.state == 'sold':
+                raise UserError('Una propiedad vendida no puede ser cancelada.')
+            record.state = 'canceled'
+        return True        
