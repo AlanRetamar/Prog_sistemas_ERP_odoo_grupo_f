@@ -85,9 +85,24 @@
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
                 <form string="Formulario de propiedades">
-                    <header>
-                        <field name="state" widget="statusbar"/>
-                    </header>
+                   <header>
+                    <button name="action_sold" 
+                            type="object" 
+                            string="Marcar como vendida" 
+                            class="oe_highlight"
+                            invisible="state in ['sold', 'canceled']"/>
+                    
+                    <button name="action_cancel" 
+                            type="object" 
+                            string="Cancelar"
+                            invisible="state in ['sold', 'canceled']"/>
+                     <field name="state" widget="statusbar"/>
+                  </header>
+                    <!-- Ribbon widget -->
+                  <widget name="web_ribbon" 
+                    title="Vendida" 
+                    bg_color="text-bg-success"
+                    invisible="state != 'sold'"/>
                     <sheet>
                         <group>
                             <h1>
@@ -106,6 +121,7 @@
                             <group>
                                 <field name="expected_price"/>
                                 <field name="selling_price"/>
+                                <field name="best_offer"/>
                             </group>
                         </group>
                         <notebook>
