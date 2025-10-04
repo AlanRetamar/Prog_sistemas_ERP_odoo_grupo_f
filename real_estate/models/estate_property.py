@@ -123,3 +123,4 @@ class EstateProperty(models.Model):
                 raise UserError('Una propiedad vendida no puede ser cancelada.')
             record.state = 'canceled'
         return True        
+        
