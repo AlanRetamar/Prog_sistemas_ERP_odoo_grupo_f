@@ -1,5 +1,4 @@
 from odoo import models, fields
-
 # ---- punto 31
 
 # hereda de Model
