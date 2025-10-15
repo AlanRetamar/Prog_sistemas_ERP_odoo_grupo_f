@@ -2,19 +2,40 @@
 <odoo>
     <data>
         <!-- Punto 6 -->
-       <menuitem id="menu_estate_root" name="Inmobiliaria">  <!-- Menu raiz -->
-             <menuitem id="menu_estate_advertisements" name="Anuncios"> <!-- Menu de primer nivel -->
-                 <menuitem id="menu_estate_property" action="estate_property_action" /> <!-- Menu de accion -->
-             </menuitem>
-    
-         <!-- Punto 28 a -->
-             <menuitem id="menu_estate_settings" name="Ajustes">  <!-- Menu de primer nivel -->
-                 <!-- Punto 28 b -->
-                 <menuitem id="menu_estate_property_type_action" action="estate_property_type_action" /> <!-- Menu de accion -->
-                 <!-- Punto 34 -->
-                 <menuitem id="menu_estate_property_tag_action" action="estate_property_tag_action" /> <!-- Menu de accion -->
-             </menuitem>
-             
-        </menuitem>
+        <menuitem id="menu_estate_root" name="Inmobiliaria"/>
+
+        <!-- Menu de primer nivel -->
+        <menuitem id="menu_estate_advertisements" 
+                  name="Anuncios" 
+                  parent="menu_estate_root"/>
+
+        <menuitem id="menu_estate_settings" 
+                  name="Ajustes" 
+                  parent="menu_estate_root"/>
+
+        <!-- Menu de accion: Propiedades -->
+        <menuitem id="menu_estate_property" 
+                  name="Propiedades"
+                  action="estate_property_action"
+                  parent="menu_estate_advertisements"/>
+
+        <!-- Punto 28 b: Tipos de propiedad -->
+        <menuitem id="menu_estate_property_type_action" 
+                  name="Tipos de propiedad"
+                  action="estate_property_type_action"
+                  parent="menu_estate_settings"/>
+
+        <!-- Punto 34: Etiquetas -->
+        <menuitem id="menu_estate_property_tag_action" 
+                  name="Etiquetas"
+                  action="estate_property_tag_action"
+                  parent="menu_estate_settings"/>
+
+        <!-- Punto 12 unidad 2: Ofertas -->
+        <menuitem id="estate_property_offer_menu"
+                  name="Ofertas"
+                  action="estate_property_offer_action"
+                  parent="menu_estate_advertisements"
+                  sequence="20"/>
     </data>
 </odoo>

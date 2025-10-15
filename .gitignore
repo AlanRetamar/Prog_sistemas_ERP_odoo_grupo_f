@@ -1,0 +1,5 @@
+# Ignorar carpetas completas
+oficiales/
+
+# También puedes ignorar archivos específicos o por tipo
+*.yaml

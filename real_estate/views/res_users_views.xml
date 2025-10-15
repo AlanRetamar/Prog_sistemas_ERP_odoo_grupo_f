@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <!-- Punto 25 unidad 2 -->
+        <record id="view_users_form" model="ir.ui.view">
+            <field name="name">res.users.form.inherit.real.estate</field>
+            <field name="model">res.users</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Propiedades" name="properties">
+                            <field name="property_ids" readonly="1" />
+                    </page>
+                </xpath>
+            </field>
+        </record>
+</odoo>

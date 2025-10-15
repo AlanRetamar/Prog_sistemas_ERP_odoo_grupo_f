@@ -15,6 +15,7 @@
         'views/estate_property_tag_views.xml', # Punto 33
         'views/estate_property_offer_views.xml', # Punto 40
         'views/real_estate_menuitem.xml', # Punto 6
+        'views/res_users_views.xml', # Punto 25 unidad 2
     ],
     'application': True,
 }

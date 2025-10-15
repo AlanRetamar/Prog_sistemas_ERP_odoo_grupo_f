@@ -55,11 +55,6 @@
             <field name="context">{'group_by': 'property_type_id'}</field>
         </record>
 
-        <menuitem
-            id="estate_property_offer_menu"
-            name="Ofertas"
-            action="estate_property_offer_action"
-            parent="menu_estate_advertisements"
-            sequence="20"/>
+
         </data>
 </odoo>

@@ -86,17 +86,39 @@
             <field name="arch" type="xml">
                 <form string="Formulario de propiedades">
                    <header>
-                    <button name="action_sold" 
-                            type="object" 
-                            string="Marcar como vendida" 
-                            class="oe_highlight"
-                            invisible="state in ['sold', 'canceled']"/>
-                    
-                    <button name="action_cancel" 
-                            type="object" 
-                            string="Cancelar"
-                            invisible="state in ['sold', 'canceled']"/>
-                     <field name="state" widget="statusbar"/>
+                    <!-- Punto 15 unidad 2 -->
+                        <button name="action_sold" 
+                                type="object" 
+                                string="Marcar como vendida" 
+                                class="oe_highlight"
+                                invisible="state in ['sold', 'canceled']"/>
+                        <!-- Punto 15 unidad 2 -->
+                        <button name="action_cancel" 
+                                type="object" 
+                                string="Cancelar"
+                                invisible="state in ['sold', 'canceled']"/>
+                        <!-- Punto 20 unidad 2 -->
+                        <button name="action_generate_offer"
+                                type="object"
+                                string="Generar oferta automática"
+                                class="btn-primary"
+                                icon="fa-random"/>
+                        <!-- Punto 21 unidad 2 -->
+                        <button name="action_clear_tags"
+                                type="object"
+                                string="Sacar etiquetas"
+                                class="btn-secondary"/>
+
+                        <button name="action_load_all_tags"
+                                type="object"
+                                string="Cargar todas las etiquetas"
+                                class="btn-primary"/>
+
+                        <button name="action_add_new_tag"
+                                type="object"
+                                string="A estrenar"
+                                class="btn-success"/>
+                        <field name="state" widget="statusbar"/>
                   </header>
                     <!-- Ribbon widget -->
                   <widget name="web_ribbon" 
@@ -152,6 +174,10 @@
                             <!-- Punto 41 -->
                             <page string="Ofertas">
                                 <field name="offer_ids"/>
+                            </page>
+                            <!-- Punto 19 unidad 2 -->
+                            <page string="Contactos ofertantes">
+                                <field name="offer_partner_ids"/>
                             </page>
                         </notebook>
                     </sheet>

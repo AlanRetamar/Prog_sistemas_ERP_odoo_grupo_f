@@ -1,6 +1,6 @@
 from datetime import timedelta
 from odoo import models, fields, api 
-
+from odoo.exceptions import UserError
 
 # Punto 37
 class EstatePropertyOffer(models.Model):
@@ -8,9 +8,14 @@ class EstatePropertyOffer(models.Model):
     _description = 'Oferta sobre Propiedad'
     
     price = fields.Float(string="Precio", required=True)
+    
+    #Punto 9 unidad 2
+    #9a
     validity = fields.Integer(string = "Validez (días)", default = 10 )
-   
+    #9b
     date_deadline = fields.Date(string="Fecha limite", compute="_compute_date_deadline",inverse="_inverse_date_deadline", store=True,)
+    
+
     
 
 
@@ -32,12 +37,20 @@ class EstatePropertyOffer(models.Model):
         string = 'Propiedad',
         required = True,
     )
+    
+    #Punto 11 unidad 2
     property_type_id = fields.Many2one(
         related='property_id.property_type_id',
         string='Tipo de Propiedad',
-        store=True
+        store=True,
+        readonly=False,
+        related_sudo=True
     )
+    
+    #Punto 18 unidad 2
+    _sql_constraints = [('unique_offer_name','UNIQUE(partner_id, property_id)','Una persona solo puede hacer una oferta sobre una misma propiedad')]
 
+    #Punto 10 unidad 2
     @api.depends('create_date', 'validity')
     def _compute_date_deadline(self):
         for record in self:
@@ -57,7 +70,7 @@ class EstatePropertyOffer(models.Model):
                 # Si no hay create_date, usa la fecha actual
                 delta = record.date_deadline - fields.Date.today()
                 record.validity = delta.days
-                
+    #Punto 16 unidad 2            
     def action_accept_offer(self):
         """Acepta la oferta y actualiza la propiedad"""
         for record in self:
@@ -84,4 +97,25 @@ class EstatePropertyOffer(models.Model):
             other_offers.write({'status': 'refused'})
         
         return True
+    
+    #Punto 23 unidad 2 
+    @api.model_create_multi
+    def create(self, vals_list):
+        offers = super().create(vals_list)  # Creamos las ofertas
+        for offer in offers:
+            property_id = offer.property_id
+
+            # --- a) Precio debe ser mayor a la mejor oferta existente ---
+            best_price = max(property_id.offer_ids.mapped('price') or [0])
+            if offer.price < best_price:
+                raise UserError("El valor de la nueva oferta debe ser mayor a la mejor oferta existente.")
+            
+             # --- b) Solo si el estado es 'new' u 'offer_received' ---
+            if property_id.state not in ["new", "offer_received"]:
+                raise UserError("Solo se pueden hacer ofertas sobre propiedades nuevas o con ofertas recibidas.")
+
+            # --- c) Cambiar el estado de la propiedad ---
+            property_id.state = "offer_received"
+
+        return offers
         
