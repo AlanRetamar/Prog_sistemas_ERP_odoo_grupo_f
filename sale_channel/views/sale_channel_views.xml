@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<odoo>
+    <data> 
+        <record id="sale_channel_action" model="ir.actions.act_window">
+            <field name="name">Sales Channel</field>
+            <field name="res_model">sale.channel</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="sale_channel_view_form" model="ir.ui.view">
+            <field name="name">sale.channel.form</field>
+            <field name="model">sale.channel</field>
+            <field name="arch" type="xml">
+                <form string="Sale Channel">
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Name"/>
+                            <field name="code" placeholder="Code"/>
+                            <field name="warehouse_id"/>
+                            <field name="allowed_journal_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- list -->
+        <record id="sale_channel_list_view" model="ir.ui.view">
+            <field name="name">sale.channel.list</field>
+            <field name="model">sale.channel</field>
+            <field name="arch" type="xml">
+                <list string="Sale Channel">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="warehouse_id"/>
+                    <field name="allowed_journal_id"/>
+                </list>
+            </field>
+        </record>
+
+    </data>
+</odoo>

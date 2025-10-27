@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<odoo>
+    <data>
+        <menuitem id="menu_sales_channel"
+                name="Sales Channel"
+                parent="sale.menu_sale_config"
+                action="sale_channel_action"
+                groups="sale_channel.group_manager_sale_channel"
+                sequence="5"/>
+    </data>
+</odoo>
