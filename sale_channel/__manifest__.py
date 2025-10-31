@@ -15,6 +15,7 @@
         'security/ir.model.access.csv',
         'views/sale_channel_views.xml',
         'views/sale_channel_menuitem.xml',
+        'views/sale_order_views.xml',
     ],
     'application': True,
 }
