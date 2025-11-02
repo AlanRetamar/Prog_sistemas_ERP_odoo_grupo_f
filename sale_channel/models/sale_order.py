@@ -1,5 +1,4 @@
 from odoo import fields, models, api
-from odoo.exceptions import UserError
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -23,6 +22,7 @@ class SaleOrder(models.Model):
         """
         if self.channel_id and self.channel_id.warehouse_id:
             self.warehouse_id = self.channel_id.warehouse_id
+
 
     def _prepare_invoice(self):
         # 1. Llamar al método padre para obtener los valores base
@@ -56,3 +56,4 @@ class SaleOrder(models.Model):
         if self.channel_id:
             vals['channel_id'] = self.channel_id.id
         return vals   
+        
