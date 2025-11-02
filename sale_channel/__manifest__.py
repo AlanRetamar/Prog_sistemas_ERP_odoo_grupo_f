@@ -1,6 +1,6 @@
 
 {
-    'name': 'Canal de Venta',
+    'name': 'Canal de Venta prueba cambio de  nombre',
     'author': 'UNLa',
     'version': '1.0.0',
     'description': 'Módulo de Canal de Venta',
