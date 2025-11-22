@@ -1,0 +1,29 @@
+<odoo>
+    <!-- Punto 2 a -->
+    <!-- Esta vista hereda del formulario de órdenes de venta para agregar el campo "Canal de venta" -->
+    <record id="view_order_form_inherit_channel" model="ir.ui.view">
+        
+        <!-- Nombre técnico de la vista (buena práctica incluir el modelo y la funcionalidad) -->
+        <field name="name">sale.order.form.inherit.channel</field>
+
+        <!-- Indica que esta vista afecta al modelo sale.order -->
+        <field name="model">sale.order</field>
+
+        <!-- Se indica que esta vista hereda de la vista base 'sale.view_order_form' -->
+        <!-- Esto permite extender el formulario original sin reescribirlo completamente -->
+        <field name="inherit_id" ref="sale.view_order_form"/>
+
+        <field name="arch" type="xml">
+            <!-- Inserta contenido nuevo en el árbol XML de la vista original -->
+            <!-- El xpath busca el campo 'partner_id' (cliente) y coloca el nuevo campo justo después -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+
+                <!-- Agrega el campo 'channel_id' (Canal de venta) al formulario de ventas -->
+                <!-- options="{'no_create_edit': False}" permite crear o editar canales desde el propio formulario -->
+                <field name="channel_id" options="{'no_create_edit': False}"/>
+            </xpath>
+        </field>
+
+    </record>
+</odoo>
+

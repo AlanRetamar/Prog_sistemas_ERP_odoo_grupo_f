@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0"> 
+        <record id="sale_channel_category_group" model="ir.module.category">
+            <field name="name">Sale Channel</field>
+        </record>
+       
+        <!-- Grupo Manager de Canales -->
+        <record id="group_manager_sale_channel" model="res.groups">
+            <field name="name">Manager de Canal de Venta</field>
+            <field name="category_id" ref="sale_channel_category_group"/> 
+        </record>
+    </data>
+</odoo>
